@@ -1,4 +1,4 @@
 <header>
-    <a href="./index.php?page=home">Home</a>
-    <a href="./index.php?page=contact">Contact</a>
+    <a href="home">Home</a>
+    <a href="contact">Contact</a>
 </header>

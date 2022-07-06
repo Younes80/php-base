@@ -1,6 +1,10 @@
 <?php
-require_once './.env';
 
+namespace models;
+
+use PDO;
+
+require_once './.env';
 
 
 class Database

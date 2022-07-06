@@ -1,7 +1,12 @@
 <?php
 
-require_once './models/product/Product.manager.php';
-require_once './models/Database.php';
+namespace controllers\api;
+
+use models\Database;
+use models\product\ProductManager;
+
+// require_once './models/product/Product.manager.php';
+// require_once './models/Database.php';
 
 class ApiController
 {

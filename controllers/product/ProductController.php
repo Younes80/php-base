@@ -1,6 +1,12 @@
 <?php
 
-require_once './models/product/Product.manager.php';
+namespace controllers\product;
+
+use controllers\Security;
+use models\product\ProductManager;
+
+// require_once './models/product/Product.manager.php';
+// require_once './controllers/Security.php';
 
 class ProductController
 {
@@ -19,7 +25,6 @@ class ProductController
         $products = $this->productManager->getProducts();
         if ($id) {
             $product = $this->productManager->getProduct($id);
-            require_once './views/home.php';
         }
         require_once './views/home.php';
     }
@@ -27,8 +32,8 @@ class ProductController
     public function setProduct()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['name'] ?? '';
-            $id = $_POST['id'] ?? '';
+            $name = Security::secureHTML($_POST['name'])  ?? '';
+            $id = Security::secureHTML($_POST['id'])  ?? '';
 
             if ($id) {
                 $this->productManager->updateProduct($name, $id);
@@ -49,7 +54,7 @@ class ProductController
 
     public function deleteProduct()
     {
-        $id = $_GET['id'];
+        $id = $_GET['id']  ?? '';
         if ($id) {
             $this->productManager->deleteProduct($id);
             header('Location: home');

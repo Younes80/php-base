@@ -1,6 +1,6 @@
 <div class="content">
     <h2>Listes de produit</h2>
-    <form action="create-fruit" method="POST">
+    <form action="create-product" method="POST">
         <input type="text" name="name" id="name" placeholder="Nouveau fruit">
         <button type="submit">Envoyer</button>
         <?php if ($error) : ?>
