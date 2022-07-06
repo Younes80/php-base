@@ -1,6 +1,6 @@
 <div class="content">
     <h2>Listes de produit</h2>
-    <form action="./index.php?page=back/create-fruit" method="POST">
+    <form action="create-fruit" method="POST">
         <input type="text" name="name" id="name" placeholder="Nouveau fruit">
         <button type="submit">Envoyer</button>
         <?php if ($error) : ?>
@@ -9,9 +9,17 @@
     </form>
     <ul>
         <?php foreach ($products as $product) : ?>
-            <li><?= $product->name ?></li>
-            <a href="./index.php?page=back/edit-fruit&id=<?= $product->id ?>">Modifier</a>
-            <a href="./index.php?page=back/delete-fruit&id=<?= $product->id ?>">Supprimer</a>
+            <?php if ((int) $id === $product->id) : ?>
+                <form action="update-product" method="POST">
+                    <input type="hidden" name="id" id="id" value="<?= $product->id ?>">
+                    <input type="text" name="name" id="name" value="<?= $product->name ?>">
+                    <button>Confirmer</button>
+                </form>
+            <?php else : ?>
+                <li><?= $product->name ?></li>
+                <a href="home&id=<?= $product->id ?>">Modifier</a>
+                <a href="delete-product&id=<?= $product->id ?>">Supprimer</a>
+            <?php endif; ?>
         <?php endforeach; ?>
     </ul>
 </div>

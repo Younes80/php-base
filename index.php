@@ -1,13 +1,17 @@
 <?php
+
+
+define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
+
 require_once './controllers/product/Product.controller.php';
 require_once './controllers/api/Api.controller.php';
 $productController = new ProductController();
 $apiController = new ApiController();
 
 $page = $_GET['page'] ?? '';
-
+$id = $_GET['id'] ?? '';
 if (empty($page)) {
-    header('Location: index.php?page=back/home');
+    header('Location: back/home');
 }
 
 $url = explode("/", filter_var($page, FILTER_SANITIZE_URL));
@@ -18,11 +22,11 @@ if ($url[0] === "back") {
         $productController->getProducts();
     } elseif ($url[1] === "contact") {
         require_once './views/contact.php';
-    } elseif ($url[1] === "create-fruit") {
+    } elseif ($url[1] === "create-product") {
         $productController->setProduct();
-    } elseif ($url[1] === "edit-fruit") {
-        $productController->updateProduct();
-    } elseif ($url[1] === "delete-fruit") {
+    } elseif ($url[1] === "update-product") {
+        $productController->setProduct();
+    } elseif ($url[1] === "delete-product") {
         $productController->deleteProduct();
     }
     $content = ob_get_clean();
